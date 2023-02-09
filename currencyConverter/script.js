@@ -10,9 +10,9 @@ const currencyInputUnit = document.getElementById("currencyInputUnit");
 
 const converter = async () => {
     try{
-        let response = await fetch("https://v6.exchangerate-api.com/v6/aea28dd2422bef2fbc2f581a/latest/INR");
-        let data = await response.json();
-        let entries = Object.entries(data.conversion_rates);
+        const response = await fetch("https://v6.exchangerate-api.com/v6/aea28dd2422bef2fbc2f581a/latest/INR");
+        const data = await response.json();
+        const entries = Object.entries(data.conversion_rates);
         entries.map(([key, val] = entry) => {
             currencies.innerHTML += `<option value="${val.toFixed(3)}">${key}</option>`;
             currenciesFrom.innerHTML += `<option value="${val.toFixed(3)}">${key}</option>`;
@@ -27,10 +27,10 @@ converter();
 
 const convertFromOtherCurrency = async () =>{
     try{
-        let country = currenciesFrom.options[currenciesFrom.selectedIndex].text
-        let response = await fetch(`https://v6.exchangerate-api.com/v6/aea28dd2422bef2fbc2f581a/latest/${country}`);
-        let data = await response.json();
-        let entries = Object.entries(data.conversion_rates);
+        const country = currenciesFrom.options[currenciesFrom.selectedIndex].text
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/aea28dd2422bef2fbc2f581a/latest/${country}`);
+        const data = await response.json();
+        const entries = Object.entries(data.conversion_rates);
         currencies.innerHTML = "";
         entries.map(([key, val] = entry) => {
             currencies.innerHTML += `<option value="${val.toFixed(3)}">${key}</option>`;
@@ -46,7 +46,7 @@ currenciesFrom.addEventListener('change', ()=>{
 })
 
 convert.addEventListener("click", () => {
-    let x = currencies.value;
+    const x = currencies.value;
     output.innerText = (x * currencyInput.value).toFixed(3);
     convertedCurrency.innerText = currencies.options[currencies.selectedIndex].text;
     exchangeRateValue.innerText = x;
